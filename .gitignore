@@ -1,0 +1,16 @@
+# Python virtual environment
+.venv/
+venv/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Bytecode files
+__pycache__/
+
+# System files (Mac)
+.DS_Store
+
+# Cache folders
+*.cache/
+

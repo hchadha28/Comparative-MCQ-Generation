@@ -1,0 +1,19 @@
+# Core libraries
+transformers==4.36.0
+torch==2.1.0
+
+# Data handling
+pandas==2.1.0
+
+# Evaluation
+rouge-score==0.1.2
+
+# Fine-tuning (LoRA / PEFT)
+peft==0.7.0
+bitsandbytes==0.41.0
+
+# Notebook support
+jupyter==1.0.0
+
+# Utilities
+tqdm
