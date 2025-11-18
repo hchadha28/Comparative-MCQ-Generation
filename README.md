@@ -28,7 +28,7 @@ To conduct a systematic comparison between:
 
 ## 🧪 Method Overview
 
-- **Dataset**: 250 curated Geography MCQs  
+- **Dataset**: 400 curated Geography MCQs  
 - **Models**:
   - GPT-4 (Few-Shot)
   - Llama-2-7B (LoRA Fine-Tuned)
