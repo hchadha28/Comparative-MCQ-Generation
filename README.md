@@ -60,7 +60,7 @@ This study investigates the following:
   - Answer correctness  
   - Distractor plausibility  
 ## 📁 Project Structure
-
+```text
 mcqGenX/  
 │  
 ├── README.md  
@@ -84,6 +84,8 @@ mcqGenX/
 │  
 └── examples/  
     └── few_shot_examples.jsonl  
+
+---
 ## ⚙️ Environment Setup
 
 ### Python Version
