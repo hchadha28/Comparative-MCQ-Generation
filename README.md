@@ -84,6 +84,7 @@ mcqGenX/
 │  
 └── examples/  
     └── few_shot_examples.jsonl  
+```
 
 ---
 ## ⚙️ Environment Setup
