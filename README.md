@@ -25,7 +25,6 @@ The goal is to determine which approach yields better:
 - Context relevance
 - Distractor plausibility
 - Cost and performance balance
----
 ## 🔍 Research Questions
 
 This study investigates the following:
@@ -60,8 +59,6 @@ This study investigates the following:
   - Contextual relevance  
   - Answer correctness  
   - Distractor plausibility  
-
----
 ## 📁 Project Structure
 
 mcqGenX/  
@@ -87,8 +84,6 @@ mcqGenX/
 │  
 └── examples/  
     └── few_shot_examples.jsonl  
-
----
 ## ⚙️ Environment Setup
 
 ### Python Version
@@ -153,25 +148,3 @@ Compute ROUGE + human metrics.
 
 Save results in:
 - results/evaluation.json
-## 🎓 Purpose of the Study
-
-This project helps determine whether educational platforms should rely on:
-
-- **Large general-purpose LLMs** using few-shot prompting  
-**or**
-- **Smaller, fine-tuned models (LoRA)** trained on curated domain data  
-
-for scalable, high-quality automated MCQ generation.
-
-The findings contribute to research in:
-- Educational technology  
-- Language model adaptation  
-- Assessment automation  
-- Cost-efficient AI deployment  
-
----
-
-## 📚 Reference
-
-Brown, T. et al. (2020).  
-*Language Models are Few-Shot Learners.* NeurIPS.
