@@ -1,89 +1,177 @@
-# Comparative Analysis of Few-Shot Learning and Fine-Tuning for Automated MCQ Generation
+# 📘 Comparative Analysis of Few-Shot Learning and Fine-Tuning for Automated MCQ Generation
 
-This project is inspired by the influential research paper **“Language Models are Few-Shot Learners” (Brown et al., 2020)**, which introduced the idea that large language models can perform new tasks using only a few examples. Building on this concept, our study investigates whether few-shot prompting alone is sufficient for generating high-quality educational assessments, or whether **fine-tuning a smaller model** offers measurable improvements.
+This repository contains the implementation and experiments for an academic study comparing two modern approaches in Large Language Models (LLMs) for automated MCQ generation:
 
+- **Few-Shot Learning** using GPT-3.5 / Claude 3.5 Haiku  
+- **Parameter-Efficient Fine-Tuning (LoRA)** using Llama-2-7B  
+
+Inspired by *“Language Models are Few-Shot Learners” (Brown et al., 2020)*, this project evaluates whether prompting alone can match the quality of a fine-tuned model for generating educational MCQs.
+## 🎯 Objective
+
+This project compares two strategies for automated MCQ generation:
+
+### 1. Few-Shot Prompting (GPT-3.5 / Claude Haiku)
+- Requires **no training**
+- Uses **3–5 curated MCQ examples**
+- Extremely **low compute cost**
+
+### 2. LoRA Fine-Tuning (Llama-2-7B)
+- Fine-tuned on **400 Geography MCQs**
+- Runs efficiently on a **free Google Colab GPU**
+- Produces a **domain-specialized model**
+
+The goal is to determine which approach yields better:
+- MCQ quality
+- Context relevance
+- Distractor plausibility
+- Cost and performance balance
 ---
-
-## 🎯 Academic Objective
-
-To conduct a systematic comparison between:
-
-1. **Few-Shot Prompting (GPT-4)**
-   - No training required  
-   - Uses 3–5 example MCQs as demonstrations  
-
-2. **Parameter-Efficient Fine-Tuning (Llama-2-7B with LoRA)**
-   - Domain adaptation using 200 geography MCQs  
-   - Efficient, low-cost fine-tuning  
-
----
-
 ## 🔍 Research Questions
 
-- Can few-shot prompting alone generate MCQs comparable to those from fine-tuned models?  
-- Does fine-tuning give stronger domain-specific control and consistency?  
-- What are the trade-offs in **cost**, **accuracy**, and **compute**?
+This study investigates the following:
+
+1. **Can few-shot prompting match the quality of a fine-tuned model?**
+2. **Does fine-tuning improve domain-specific accuracy and distractor quality?**
+3. **What are the trade-offs between model size, cost, and performance?**
+4. **Which approach is more practical for scalable MCQ generation in education systems?**
+## 🧪 Methodology
+
+### Dataset
+- **400 Geography MCQs** (AI-assisted + human-reviewed)
+- Balanced across:
+  - Physical Geography  
+  - Human Geography  
+  - Regional Geography  
+  - Environmental Geography  
+  - Geospatial Skills  
+- Difficulty levels: Easy / Medium / Hard  
+- Stored in **JSONL** format
+
+### Models Compared
+
+| Approach            | Model               | Notes                                   |
+|--------------------|---------------------|-----------------------------------------|
+| Few-Shot Prompting | GPT-3.5 / Claude Haiku | No training required                    |
+| Fine-Tuning        | Llama-2-7B + LoRA      | Efficient training on free Colab GPU    |
+
+### Evaluation Metrics
+- **ROUGE-1, ROUGE-2, ROUGE-L**
+- **Human evaluation** on:
+  - Contextual relevance  
+  - Answer correctness  
+  - Distractor plausibility  
+
+---
+## 📁 Project Structure
+
+mcqGenX/  
+│  
+├── README.md  
+├── requirements.txt  
+│  
+├── data/  
+│   ├── dataset_raw.jsonl  
+│   ├── train.jsonl  
+│   ├── val.jsonl  
+│   └── test.jsonl  
+│  
+├── notebooks/  
+│   ├── 01_prepare_data.ipynb  
+│   ├── 02_few_shot.ipynb  
+│   └── 03_fine_tune.ipynb  
+│  
+├── results/  
+│   ├── few_shot_outputs.jsonl  
+│   ├── fine_tuned_outputs.jsonl  
+│   └── evaluation.json  
+│  
+└── examples/  
+    └── few_shot_examples.jsonl  
+
+---
+## ⚙️ Environment Setup
+
+### Python Version
+Use **Python 3.10** (recommended for `transformers`, `peft`, and `bitsandbytes`).
+
+### Create Virtual Environment
+
+**macOS / Linux:**
+- python3.10 -m venv .venv  
+- source .venv/bin/activate  
+
+**Windows:**
+- python -m venv .venv  
+- .venv\Scripts\activate  
+
+### Install Dependencies
+- pip install -r requirements.txt
+## 🚀 How to Run the Project
+
+### 1. Prepare the Dataset
+Open and run:
+**notebooks/01_prepare_data.ipynb**
+
+This notebook:
+- Loads `dataset_raw.jsonl`
+- Shuffles entries
+- Splits into:
+  - `train.jsonl`
+  - `val.jsonl`
+  - `test.jsonl`
 
 ---
 
-## 🧪 Method Overview
+### 2. Few-Shot MCQ Generation
+Run:
+**notebooks/02_few_shot.ipynb**
 
-- **Dataset**: 400 curated Geography MCQs  
-- **Models**:
-  - GPT-4 (Few-Shot)
-  - Llama-2-7B (LoRA Fine-Tuned)
-- **Evaluation**:
-  - ROUGE-1 / ROUGE-2 / ROUGE-L  
-  - Human evaluation: relevance, correctness, distractor plausibility  
+Requirements:
+- Claude or OpenAI API key
 
----
-
-## 📘 Project Structure
-
-```text
-mcqGenX/
-│
-├── README.md
-├── requirements.txt
-│
-├── data/
-│   ├── dataset_raw.jsonl
-│   ├── train.jsonl
-│   ├── val.jsonl
-│   └── test.jsonl
-│
-├── notebooks/
-│   ├── 01_prepare_data.ipynb
-│   ├── 02_few_shot.ipynb
-│   └── 03_fine_tune.ipynb
-│
-├── results/
-│   ├── few_shot_outputs.jsonl
-│   ├── fine_tuned_outputs.jsonl
-│   └── evaluation.json
-│
-└── examples/
-    └── few_shot_examples.jsonl
-```
+Output saved to:
+- results/few_shot_outputs.jsonl
 
 ---
 
+### 3. Fine-Tuning Llama-2-7B (LoRA) — Google Colab
+Run:
+**notebooks/03_fine_tune.ipynb**
+
+This notebook:
+- Loads training data  
+- Fine-tunes Llama-2-7B using LoRA  
+- Runs entirely on free Colab GPU  
+
+Output saved to:
+- results/fine_tuned_outputs.jsonl
+
+---
+
+### 4. Evaluation
+Compute ROUGE + human metrics.
+
+Save results in:
+- results/evaluation.json
 ## 🎓 Purpose of the Study
 
-This academic project explores whether learning platforms should rely on:
+This project helps determine whether educational platforms should rely on:
 
-- **Large general LLMs with few-shot prompting**, or  
-- **Smaller, fine-tuned domain-specific models**
+- **Large general-purpose LLMs** using few-shot prompting  
+**or**
+- **Smaller, fine-tuned models (LoRA)** trained on curated domain data  
 
-for scalable, automated MCQ generation.
+for scalable, high-quality automated MCQ generation.
 
 The findings contribute to research in:
 - Educational technology  
 - Language model adaptation  
-- Automated assessment generation  
+- Assessment automation  
+- Cost-efficient AI deployment  
 
 ---
 
 ## 📚 Reference
 
-**Brown, T. et al. (2020).** *Language Models are Few-Shot Learners.* NeurIPS.
+Brown, T. et al. (2020).  
+*Language Models are Few-Shot Learners.* NeurIPS.
